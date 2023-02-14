@@ -10,20 +10,25 @@ const PORT = process.env.PORT || 3001;
 // 
 const app = express();
 
+const testMiddle = 
+
+app.use(express.json());
+app.use(express.static('public'));
+
 // get request to return indes.html
 app.get('/', (req, res) =>
   res.sendFile(path.join(__dirname, '/public/index.html'))
 );
 
-// // get request that return notes.html at the /notes path
-// app.get('/notes', (req, res) => {
-//     res.sendFile(path.join(__dirname, '/public/notes.html'))
-// });
+// get request that return notes.html at the /notes path
+app.get('/notes', (req, res) => {
+    res.sendFile(path.join(__dirname, '/public/notes.html'))
+});
 
-// // get request that return notes from db
-// app.get('/api/notes', (req,res) => {
-//     res.json(notes);
-// })
+// get request that return notes from db
+app.get('/api/notes', (req,res) => {
+    res.json(notes);
+})
 
 // app.post('/notes', (req, res) => {
 //   // Log that a POST request was received
@@ -54,8 +59,8 @@ app.get('/', (req, res) =>
 // });
 
 // get request/ wild card route that return index.html
-// app.get('*', (req, res) =>
-//   res.sendFile(path.join(__dirname, '/public/index.html'))
-// );
+app.get('*', (req, res) =>
+  res.sendFile(path.join(__dirname, '/public/index.html'))
+);
 
 app.listen(PORT, () => console.log(`App listening on http://localhost:${PORT}`))
